@@ -1,17 +1,9 @@
-*.class
-.gradle
-/build/
-/bin/
-/.settings/
-.project
-.classpath
-
-# Package Files
-*.jar
-*.war
-*.ear
+# package directories
+node_modules
+jspm_packages
 
 # Serverless directories
 .serverless
 
-!/gradle/wrapper/gradle-wrapper.jar
+# esbuild directories
+.esbuild
