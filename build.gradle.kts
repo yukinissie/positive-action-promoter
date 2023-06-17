@@ -26,7 +26,7 @@ repositories {
 
 dependencies {
     implementation("com.amazonaws:aws-lambda-java-core:1.2.0")
-    implementation("com.amazonaws:aws-lambda-java-events:2.2.6")
+    implementation("com.amazonaws:aws-lambda-java-events:2.2.9")
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
