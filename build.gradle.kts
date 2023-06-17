@@ -9,7 +9,7 @@ val mockk_version: String by project
 plugins {
     kotlin("jvm") version "1.6.21"
     `maven-publish`
-    id("io.spring.dependency-management") version ("1.0.9.RELEASE")
+    id("io.spring.dependency-management") version ("1.1.0")
     id("com.github.johnrengelman.shadow") version ("6.0.0")
 }
 
