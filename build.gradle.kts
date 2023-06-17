@@ -47,7 +47,7 @@ dependencies {
     api("com.fasterxml.jackson.core:jackson-core:2.15.2")
     api("com.fasterxml.jackson.core:jackson-databind:2.11.0")
     api("com.fasterxml.jackson.core:jackson-annotations:2.15.2")
-    api("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0")
+    api("com.fasterxml.jackson.module:jackson-module-kotlin:2.15.2")
 
     testImplementation(kotlin("test-junit"))
     testImplementation("io.kotest:kotest-runner-junit5:$kotest_version")
