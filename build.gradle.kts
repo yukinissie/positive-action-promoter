@@ -41,7 +41,7 @@ repositories {
 
 dependencies {
     api("org.jetbrains.kotlin:kotlin-stdlib:1.6.21")
-    api("com.amazonaws:aws-lambda-java-core:1.2.1")
+    api("com.amazonaws:aws-lambda-java-core:1.2.2")
     api("com.amazonaws:aws-lambda-java-log4j2:1.5.1")
     api("org.slf4j:slf4j-simple:1.7.30")
     api("com.fasterxml.jackson.core:jackson-core:2.11.0")
