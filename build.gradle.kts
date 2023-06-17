@@ -40,7 +40,7 @@ repositories {
 //}
 
 dependencies {
-    api("org.jetbrains.kotlin:kotlin-stdlib:1.6.21")
+    api("org.jetbrains.kotlin:kotlin-stdlib:1.8.22")
     api("com.amazonaws:aws-lambda-java-core:1.2.2")
     api("com.amazonaws:aws-lambda-java-log4j2:1.5.1")
     api("org.slf4j:slf4j-simple:1.7.36")
