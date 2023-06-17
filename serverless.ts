@@ -2,6 +2,10 @@ import type { AWS } from '@serverless/typescript';
 
 import assistant from '@functions/assistant';
 
+import { config } from 'dotenv';
+
+config();
+
 const serverlessConfiguration: AWS = {
   service: 'positive-action-promoter',
   frameworkVersion: '3',
@@ -16,9 +20,11 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      OPENAI_ORG: process.env.OPENAI_ORG,
+      OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     },
     stage: 'dev',
-    region: 'ap-southeast-1',
+    region: 'ap-northeast-1',
   },
   // import the function via paths
   functions: { assistant },
