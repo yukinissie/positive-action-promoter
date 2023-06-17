@@ -10,7 +10,7 @@ plugins {
     kotlin("jvm") version "1.6.21"
     `maven-publish`
     id("io.spring.dependency-management") version ("1.0.9.RELEASE")
-    id("com.github.johnrengelman.shadow") version ("6.0.0")
+    id("com.github.johnrengelman.shadow") version ("6.1.0")
 }
 
 group = "com.yukinissie"
