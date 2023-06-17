@@ -5,16 +5,15 @@ on:
 
 jobs:
   ci:
-    name: deploy
+    name: ci
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
+      - name: use Node.js 14.x
+        uses: actions/setup-node@v3
         with:
-          java-version: '11'
-          distribution: 'adopt'
-      - name: Test with Gradle
-        run: ./gradlew test
-      - name: Build with Gradle
-        run: ./gradlew build
+          node-version: 14.x
+      - name: install dependencies
+        run: npm install
+      # - name: test
+      #   run: npm test
