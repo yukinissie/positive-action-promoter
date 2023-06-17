@@ -43,7 +43,7 @@ dependencies {
     api("org.jetbrains.kotlin:kotlin-stdlib:1.6.21")
     api("com.amazonaws:aws-lambda-java-core:1.2.2")
     api("com.amazonaws:aws-lambda-java-log4j2:1.5.1")
-    api("org.slf4j:slf4j-simple:1.7.30")
+    api("org.slf4j:slf4j-simple:1.7.36")
     api("com.fasterxml.jackson.core:jackson-core:2.15.2")
     api("com.fasterxml.jackson.core:jackson-databind:2.11.0")
     api("com.fasterxml.jackson.core:jackson-annotations:2.15.2")
