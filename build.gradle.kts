@@ -1,59 +1,66 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.github.jengelman.gradle.plugins.shadow.transformers.Log4j2PluginsCacheFileTransformer
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val ktor_version: String by project
 val kotlin_version: String by project
-val logback_version: String by project
 val kotest_version: String by project
 val mockk_version: String by project
 
 plugins {
-    kotlin("jvm") version "1.8.22"
-    id("io.ktor.plugin") version "2.3.1"
+    kotlin("jvm") version "1.6.21"
+    `maven-publish`
+    id("io.spring.dependency-management") version ("1.0.9.RELEASE")
+    id("com.github.johnrengelman.shadow") version ("6.0.0")
 }
 
 group = "com.yukinissie"
-version = "0.0.1"
-application {
-    mainClass.set("com.yukinissie.ApplicationKt")
+version = "1.0.0"
 
-    val isDevelopment: Boolean = project.ext.has("development")
-    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
+description = "Interactive app promoting positive actions."
+
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "11"
+}
+
+tasks.withType<ShadowJar> {
+    transform(Log4j2PluginsCacheFileTransformer::class.java)
 }
 
 repositories {
     mavenCentral()
 }
 
+// If requiring AWS JDK, uncomment the dependencyManagement to use the bill of materials
+//   https://aws.amazon.com/blogs/developer/managing-dependencies-with-aws-sdk-for-java-bill-of-materials-module-bom/
+//dependencyManagement {
+//    imports {
+//        mavenBom("software.amazon.awssdk:bom:2.13.18")
+//    }
+//}
+
 dependencies {
-    implementation("com.amazonaws:aws-lambda-java-core:1.2.0")
-    implementation("com.amazonaws:aws-lambda-java-events:2.2.6")
-    implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
-    implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("io.ktor:ktor-server-test-host:$ktor_version")
-    implementation("io.ktor:ktor-server-default-headers-jvm:$ktor_version")
+    api("org.jetbrains.kotlin:kotlin-stdlib:1.6.21")
+    api("com.amazonaws:aws-lambda-java-core:1.2.1")
+    api("com.amazonaws:aws-lambda-java-log4j2:1.5.1")
+    api("org.slf4j:slf4j-simple:1.7.30")
+    api("com.fasterxml.jackson.core:jackson-core:2.11.0")
+    api("com.fasterxml.jackson.core:jackson-databind:2.11.0")
+    api("com.fasterxml.jackson.core:jackson-annotations:2.11.0")
+    api("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.0")
+
+    testImplementation(kotlin("test-junit"))
     testImplementation("io.kotest:kotest-runner-junit5:$kotest_version")
     testImplementation("io.kotest:kotest-assertions-core:$kotest_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
     testImplementation("io.mockk:mockk:$mockk_version")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+tasks.build {
+    finalizedBy(getTasksByName("shadowJar", false))
 }
 
-tasks.withType<Test>().configureEach {
-    useJUnitPlatform()
-}
-
-val buildZip by tasks.registering(Zip::class) {
-    from(tasks.named("compileKotlin"))
-    from(tasks.named("processResources"))
-    into("lib") {
-        from(configurations.runtimeClasspath)
-    }
-}
-
-tasks.named("build") {
-    dependsOn(buildZip)
+task<Exec>("deploy") {
+    dependsOn("shadowJar")
+    commandLine("serverless", "deploy")
 }
