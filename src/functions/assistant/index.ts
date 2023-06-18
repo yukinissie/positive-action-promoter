@@ -16,4 +16,5 @@ export default {
       },
     },
   ],
+  timeout: 30,
 };
