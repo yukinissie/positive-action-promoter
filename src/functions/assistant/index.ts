@@ -6,6 +6,7 @@ export default {
   events: [
     {
       http: {
+        cors: true,
         method: 'post',
         path: 'assistant',
         request: {
