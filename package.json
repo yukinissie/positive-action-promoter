@@ -10,8 +10,8 @@
     "node": ">=18.16.0"
   },
   "dependencies": {
-    "@middy/core": "^3.4.0",
-    "@middy/http-json-body-parser": "^3.4.0",
+    "@middy/core": "^5.0.0",
+    "@middy/http-json-body-parser": "^5.0.0",
     "dotenv": "^16.3.1",
     "openai": "^4.28.0"
   },
