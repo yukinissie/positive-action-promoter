@@ -1,20 +1,20 @@
 import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/api-gateway';
 import { formatJSONResponse } from '@libs/api-gateway';
 import { middyfy } from '@libs/lambda';
-import { Configuration, OpenAIApi } from 'openai';
+import { ClientOptions, OpenAI } from 'openai';
 
-const configuration = new Configuration({
+const configuration: ClientOptions = {
   organization: process.env.OPENAI_ORG,
   apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+};
+const openai = new OpenAI(configuration);
 
 import schema from './schema';
 
 const assistant: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
-  const res = await openai.createChatCompletion({
+  const res = await openai.chat.completions.create({
     model: 'gpt-3.5-turbo',
     temperature: 0.5,
     messages: [
@@ -53,7 +53,7 @@ const assistant: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       },
     ],
   });
-  const result = res.data.choices[0].message.content;
+  const result = res.choices[0].message.content;
   return formatJSONResponse({
     message: result,
   });
