@@ -21,7 +21,7 @@
     "@types/node": "^20.0.0",
     "esbuild": "^0.14.11",
     "json-schema-to-ts": "^3.0.0",
-    "serverless": "^3.0.0",
+    "serverless": "^4.0.0",
     "serverless-esbuild": "^1.23.3",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^4.0.0",
